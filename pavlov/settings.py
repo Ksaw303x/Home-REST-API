@@ -25,7 +25,10 @@ SECRET_KEY = 'jxn1vb=bmksd=9k%krgd#1^jw0f^d5l@!qmlo&p=k+3w_ssh6b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'AbbestiaDC.pythonanywhere.com']
+ALLOWED_HOSTS = [
+    u'AbbestiaDC.pythonanywhere.com',
+    '127.0.0.1'
+]
 
 
 # Application definition
