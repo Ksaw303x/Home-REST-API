@@ -256,9 +256,7 @@ class TDBaseServerAPI(generics.CreateAPIView):
             encryption = request.META.get('HTTP_X_ENCRYPTION', None)
             try:
                 _binary = b64string_to_binary(raw_body)
-                if b"2019/" not in _binary:
-                    print(_binary)
-                    _binary = raw_body
+                print("DECODIFICATO <{}>".format(_binary))
             except Exception as exc:
                 _binary = raw_body
             _cast = False
@@ -277,7 +275,7 @@ class TDBaseServerAPI(generics.CreateAPIView):
         except Exception as exc:
             return self._build_reply(self.ERROR_REPLY)
 
-        # print('BODY:', data)
+        print('BODY:', data)
         message_type = self.type_of_message(data)
 
         def read_stampings():

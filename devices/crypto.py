@@ -1,8 +1,4 @@
 from Crypto.Cipher import AES, CAST
-from django.conf import settings
-from django.utils import timezone
-
-from DataWeb.licence import LicenceManager
 
 
 def fill_to_8(text):
@@ -19,14 +15,6 @@ def fill_to_8(text):
 class Crypto:
 
     def get_default_passhphrase(self):
-        licence = LicenceManager.load_licence()
-
-        d_k = licence.company_default_devices_crypto_key()
-
-        if d_k:
-            return d_k
-
-        #Default KEY
         return '2b7e151628aed2a6'
 
     def __init__(self, msg='', cast5_type=False, key=None):
@@ -49,7 +37,7 @@ class Crypto:
             cipher = AES.new(self.key, AES.MODE_ECB)
         try:
             dec = cipher.decrypt(self.msg)
-            #print("{} decodificato: <{}>".format("CAST" if self.cast5 else "AES", dec))
+            # print("{} decodificato: <{}>".format("CAST" if self.cast5 else "AES", dec))
         except ValueError as exc:
             """
             now = timezone.localtime(timezone.now(), timezone.get_current_timezone())
