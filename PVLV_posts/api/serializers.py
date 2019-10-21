@@ -1,8 +1,8 @@
-from rest_framework import serializers
 from PVLV_posts.models import Post
+from rest_framework.serializers import ModelSerializer
 
 
-class PostSerializer(serializers.ModelSerializer):
+class PostSerializer(ModelSerializer):
 
     class Meta:
         model = Post
