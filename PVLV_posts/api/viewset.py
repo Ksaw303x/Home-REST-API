@@ -12,7 +12,7 @@ class PostSnippetViewSet(ModelViewSet):
 
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    authentication_classes = (SessionAuthentication,)
+    # authentication_classes = (SessionAuthentication,)
     permission_classes = (AllowAny,)
 
     @action(methods=['get'], detail=False)
