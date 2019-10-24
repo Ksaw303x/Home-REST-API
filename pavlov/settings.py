@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+CONF_DIR = os.getenv("PAVLOV_CONF_DIR", os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -25,14 +25,33 @@ SECRET_KEY = 'jxn1vb=bmksd=9k%krgd#1^jw0f^d5l@!qmlo&p=k+3w_ssh6b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+# Read database configuration from ../database.conf
+# if it doesn't exist exit and print error.
+def setup_from_conf_file(filename):
+    try:
+        with open(os.path.join(CONF_DIR, filename + ".dev"), 'r') as conf:
+            file_conf = conf.read()
+        print("Loaded conf file {} *DEV* version".format(filename))
+        return eval(file_conf)
+
+    except FileNotFoundError:
+        try:
+            with open(os.path.join(CONF_DIR, filename), 'r') as conf:
+                file_conf = conf.read()
+            return eval(file_conf)
+
+        except FileNotFoundError:
+            print("You have to create {} file".format(filename))
+            exit(1)
+
+
 ALLOWED_HOSTS = [
     u'AbbestiaDC.pythonanywhere.com',
     '*',
 ]
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'PVLV_posts.apps.PvlvPostsConfig',
     'django.contrib.admin',
@@ -80,11 +99,9 @@ WSGI_APPLICATION = 'pavlov.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+db = setup_from_conf_file('database.conf')
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': db
 }
 
 
@@ -106,27 +123,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+# for allow requests from different domain
 CORS_ORIGIN_ALLOW_ALL = True
+
+
+LOGGING = setup_from_conf_file("logging.conf")
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
 STATIC_URL = '/static/'
 
 # default static files settings for PythonAnywhere.
@@ -134,4 +148,3 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = u'/home/AbbestiaDC/pavlov/media'
 MEDIA_URL = '/media/'
 STATIC_ROOT = u'/home/AbbestiaDC/pavlov/static'
-STATIC_URL = '/static/'

@@ -1,7 +1,9 @@
+/.idea/
+/.vscode/
 /venv/
-db.sqlite3
+/__pycache__/
 
-__pycache__
-
-*.conf
+pavlov/database.conf
 *.pyc
+*.log
+db.sqlite3
