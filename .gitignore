@@ -1,7 +1,7 @@
 /.idea/
 /.vscode/
 /venv/
-/__pycache__/
+__pycache__/
 
 pavlov/database.conf
 *.pyc

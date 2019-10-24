@@ -46,10 +46,7 @@ def setup_from_conf_file(filename):
             exit(1)
 
 
-ALLOWED_HOSTS = [
-    u'AbbestiaDC.pythonanywhere.com',
-    '*',
-]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [

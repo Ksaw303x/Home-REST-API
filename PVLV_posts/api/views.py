@@ -3,7 +3,10 @@ from PVLV_posts.api.serializers import PostSerializer
 
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticatedOrReadOnly,
+)
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -13,7 +16,7 @@ class PostSnippetViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     # authentication_classes = (SessionAuthentication,)
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     @action(methods=['get'], detail=False)
     def newest(self, request):
