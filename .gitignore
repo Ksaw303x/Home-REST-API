@@ -4,6 +4,7 @@
 __pycache__/
 
 pavlov/database.conf
+pavlov/all.database.conf
 *.pyc
 *.log
-db.sqlite3
+pavlov.db.sqlite3

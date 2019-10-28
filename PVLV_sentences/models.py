@@ -5,6 +5,16 @@ NORMAL_MODE = 2
 SPAM_MODE = 3
 
 
+class MetaData(models.Model):
+    pub_date = models.DateTimeField()
+    mod_date = models.DateTimeField()
+    n_edits = models.IntegerField()
+    rating = models.IntegerField()
+
+    class Meta:
+        abstract = True
+
+
 class Author(models.Model):
     name = models.CharField(max_length=100)
 
@@ -33,7 +43,6 @@ class Container(models.Model):
 
     sentences = models.ArrayModelField(
         model_container=Collection,
-        on_delete = models.CASCADE,
     )
 
     created_on_datetime = models.DateField()

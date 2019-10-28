@@ -51,6 +51,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 INSTALLED_APPS = [
     'PVLV_posts.apps.PvlvPostsConfig',
+    'PVLV_quotes.apps.PvlvQuotesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,6 +131,12 @@ LOGGING = setup_from_conf_file("logging.conf")
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 LANGUAGE_CODE = 'en-us'
+
+LANGUAGES = [
+    ('en-US', 'english'),
+    ('it-IT', 'italian'),
+]
+
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
