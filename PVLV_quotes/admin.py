@@ -1,8 +1,15 @@
 from django.contrib import admin
 from .models import (
     Quote,
-    QuoteTranslation
+    Translation
 )
+from .models import *
 
 
-admin.site.register([Quote, QuoteTranslation])
+admin.site.register([
+    Quote,
+    Translation,
+    Comment,
+    Tag,
+    # Answer,
+])

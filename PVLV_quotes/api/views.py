@@ -1,11 +1,13 @@
 from PVLV_quotes.models import (
     Quote,
-    QuoteTranslation
+    Translation
 )
+from PVLV_quotes.models import *
 from PVLV_quotes.api.serializers import (
     QuoteSerializer,
-    QuoteTranslationSerializer,
+    TranslationSerializer,
 )
+from PVLV_quotes.api.serializers import *
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import action
 from rest_framework.permissions import (
@@ -18,36 +20,46 @@ from rest_framework.status import (
     HTTP_400_BAD_REQUEST
 )
 from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+from django_filters import FilterSet
+from django_filters import rest_framework as filters
+
+"""
+class PollFilter(FilterSet):
+    tags = filters.CharFilter(method="filter_by_tags")
+
+    class Meta:
+        model = Question
+        fields = ["tags"]
+
+    def filter_by_tags(self, queryset, name, value):
+        tag_names = value.strip().split(",")
+        tags = Tag.objects.filter(name__in=tag_names)
+        return queryset.filter(tags__in=tags).distinct()
+"""
 
 
-class QuotesSnippetViewSet(ModelViewSet):
-
-    queryset = Quote.objects.all()
+class PollViewSet(ModelViewSet):
     serializer_class = QuoteSerializer
-    permission_classes = (AllowAny,)
+    queryset = Quote.objects.all()
+    lookup_field = 'id'
+    filter_backends = (DjangoFilterBackend,)
+    # filter_class = PollFilter
 
-    @action(detail=True, methods=['get'])
-    def translations(self, request, pk=None):
-        quote = self.get_object()
-        translations = QuoteTranslation.objects.filter(quote=quote)
-        for translation in translations:
-            print(translation)
-        if translations:
-            serialized_data = QuoteTranslationSerializer(translations, many=True)
-        else:
-            serialized_data = []
-        return Response(serialized_data, HTTP_200_OK)
+    @action(detail=True, methods=["GET"])
+    def translations(self, request, id=None):
+        question = self.get_object()
+        choices = Translation.objects.filter(question=question)
+        serializer = TranslationSerializer(choices, many=True)
+        return Response(serializer.data, status=200)
 
-
-"""
-    @action(detail=True, methods=['post'])
-    def translation(self, request, pk=None):
-        quote = self.get_object()
+    @action(detail=True, methods=["POST"])
+    def choice(self, request, id=None):
+        question = self.get_object()
         data = request.data
-        # data['translation'] = quote.pk
-        serialized_data = QuoteTranslationSerializer(data=request.data)
-        if serialized_data.is_valid():
-            return Response(serialized_data, HTTP_200_OK)
-        return Response(serialized_data, HTTP_400_BAD_REQUEST)
-
-"""
+        data["question"] = question.id
+        serializer = TranslationSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.erros, status=400)
