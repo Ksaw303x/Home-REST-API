@@ -18,7 +18,7 @@ class QuoteTranslationSerializer(ModelSerializer):
 
 
 class QuoteSerializer(ModelSerializer):
-    # translations = QuoteTranslationSerializer(many=True)
+    translations = QuoteTranslationSerializer(many=True, read_only=True)
 
     class Meta:
         model = Quote
@@ -27,5 +27,6 @@ class QuoteSerializer(ModelSerializer):
             'customizable',
             'text',
             'tags',
-            # 'translations',
+            'translations',
         )
+        depth = 2

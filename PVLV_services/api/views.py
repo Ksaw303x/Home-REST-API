@@ -18,7 +18,6 @@ def datetime_now(request):
 
 
 def server_ip(request):
-
     """
     Return the public ip of this machine.
     """
