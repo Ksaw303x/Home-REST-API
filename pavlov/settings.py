@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'PVLV_posts.apps.PvlvPostsConfig',
     'PVLV_quotes.apps.PvlvQuotesConfig',
     'PVLV_secret_agency.apps.PvlvSecretAgencyConfig',
+    'PVLV_services.apps.PvlvServicesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

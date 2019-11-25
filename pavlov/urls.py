@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/', include('PVLV_posts.urls')),
     path('api/', include('PVLV_quotes.urls')),
     path('api/', include('PVLV_secret_agency.urls')),
+    path('api/', include('PVLV_services.urls')),
 ]
