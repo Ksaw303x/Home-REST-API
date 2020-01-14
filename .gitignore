@@ -8,3 +8,4 @@ pavlov/all.database.conf
 *.pyc
 *.log
 pavlov.db.sqlite3
+db-pavlov

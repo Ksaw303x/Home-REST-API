@@ -1,5 +1,8 @@
-django == 2.2.6
+django == 2.2.8
 djangorestframework == 3.10.3
 django-filter == 2.2.0
 django-cors-headers == 3.1.1
 requests == 2.22.0
+ask-sdk == 1.13.0
+cryptography
+django-ask-sdk == 1.0.0
