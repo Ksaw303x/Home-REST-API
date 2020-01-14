@@ -1,11 +1,11 @@
 /.idea/
 /.vscode/
 /venv/
-__pycache__/
+/__pycache__/
 
-pavlov/database.conf
-pavlov/all.database.conf
+/pavlov/database.conf
+/pavlov/site-settings.conf
+
 *.pyc
 *.log
 pavlov.db.sqlite3
-db-pavlov

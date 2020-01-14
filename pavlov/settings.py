@@ -16,29 +16,20 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONF_DIR = os.getenv("PAVLOV_CONF_DIR", os.path.dirname(__file__))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'jxn1vb=bmksd=9k%krgd#1^jw0f^d5l@!qmlo&p=k+3w_ssh6b'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-
-# Read database configuration from ../database.conf
+# Read database configuration files
 # if it doesn't exist exit and print error.
 def setup_from_conf_file(filename):
     try:
-        with open(os.path.join(CONF_DIR, filename + ".dev"), 'r') as conf:
-            file_conf = conf.read()
+        with open(os.path.join(CONF_DIR, filename + ".dev"), 'r') as file:
+            file_conf = file.read()
         print("Loaded conf file {} *DEV* version".format(filename))
         return eval(file_conf)
 
     except FileNotFoundError:
         try:
-            with open(os.path.join(CONF_DIR, filename), 'r') as conf:
-                file_conf = conf.read()
+            with open(os.path.join(CONF_DIR, filename), 'r') as file:
+                file_conf = file.read()
             return eval(file_conf)
 
         except FileNotFoundError:
@@ -46,7 +37,13 @@ def setup_from_conf_file(filename):
             exit(1)
 
 
-ALLOWED_HOSTS = ['*']
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = setup_from_conf_file('site-settings.conf')['SECRET_KEY']
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = setup_from_conf_file('site-settings.conf')['DEBUG']
+
+ALLOWED_HOSTS = setup_from_conf_file('site-settings.conf')['ALLOWED_HOSTS']
 
 # Application definition
 INSTALLED_APPS = [
