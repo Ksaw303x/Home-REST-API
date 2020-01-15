@@ -5,6 +5,9 @@ def welcome_sentence():
     sentence_list = [
         'Ciao Biondo, dimmi pure che ti serve.',
         'Buona li, dimmi tutto.',
+        'Ciao Frocio, cosa ti serve?',
+        'Sono caldo, illuminami con le tue richieste.',
+        'Eccomi qui, per ascoltare le tue cagate, dimmi.',
     ]
     idx = randrange(0, len(sentence_list)-1)
     return sentence_list[idx]
