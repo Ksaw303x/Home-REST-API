@@ -4,7 +4,7 @@ from datetime import datetime
 from django.http import HttpResponse
 
 
-def datetime_now(request):
+def datetime_now():
     """
     Return the date and time locally on the server.
     """
@@ -17,7 +17,7 @@ def datetime_now(request):
         return HttpResponse(res_json, content_type='application/json')
 
 
-def server_ip(request):
+def server_ip():
     """
     Return the public ip of this machine.
     """

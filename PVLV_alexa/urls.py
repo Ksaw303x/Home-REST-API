@@ -2,9 +2,11 @@ from django.urls import path
 from PVLV_alexa.skill.pavlov_skill import skill
 from django_ask_sdk.skill_adapter import SkillAdapter
 
-pavlov_skill_view = SkillAdapter.as_view(
-    skill=skill)
+from PVLV_alexa.views import alexa_home
+
+my_skill_view = SkillAdapter.as_view(skill=skill)
 
 urlpatterns = [
-    path('', pavlov_skill_view, name='index'),
+    path('', alexa_home),
+    path('pavlov/', my_skill_view, name='index'),
 ]
