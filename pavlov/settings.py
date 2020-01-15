@@ -38,12 +38,12 @@ def setup_from_conf_file(filename):
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = setup_from_conf_file('site-settings.conf')['SECRET_KEY']
+SECRET_KEY = setup_from_conf_file('server.conf')['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = setup_from_conf_file('site-settings.conf')['DEBUG']
+DEBUG = setup_from_conf_file('server.conf')['DEBUG']
 
-ALLOWED_HOSTS = setup_from_conf_file('site-settings.conf')['ALLOWED_HOSTS']
+ALLOWED_HOSTS = setup_from_conf_file('server.conf')['ALLOWED_HOSTS']
 
 # Application definition
 INSTALLED_APPS = [

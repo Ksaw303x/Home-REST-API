@@ -4,7 +4,7 @@
 
 /__pycache__/
 /pavlov/database.conf
-/pavlov/site-settings.conf
+/pavlov/server.conf
 
 *.pyc
 *.log
