@@ -4,7 +4,7 @@ from PVLV_quotes.api.views import PollViewSet
 
 
 router = routers.DefaultRouter()
-router.register('v1/quotes', PollViewSet)
+router.register('', PollViewSet)
 
 urlpatterns = [
     path('', include(router.urls))

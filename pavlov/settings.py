@@ -48,6 +48,7 @@ ALLOWED_HOSTS = setup_from_conf_file('server.conf')['ALLOWED_HOSTS']
 # Application definition
 INSTALLED_APPS = [
     'PVLV_alexa.apps.PvlvAlexaConfig',
+    'PVLV_music.apps.PvlvMusicConfig',
     'PVLV_posts.apps.PvlvPostsConfig',
     'PVLV_quotes.apps.PvlvQuotesConfig',
     'PVLV_secret_agency.apps.PvlvSecretAgencyConfig',

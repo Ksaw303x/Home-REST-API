@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from pavlov.views import pavlov_home
 
 urlpatterns = [
+    path('', pavlov_home),
     path('admin/', admin.site.urls),
     path('alexa/', include('PVLV_alexa.urls')),
-    path('api/', include('PVLV_posts.urls')),
-    path('api/', include('PVLV_quotes.urls')),
-    path('api/', include('PVLV_secret_agency.urls')),
-    path('api/', include('PVLV_services.urls')),
+    path('posts/', include('PVLV_posts.urls')),
+    path('quotes/', include('PVLV_quotes.urls')),
+    path('secret-agency/', include('PVLV_secret_agency.urls')),
+    path('sentences/', include('PVLV_sentences.urls')),
+    path('services/', include('PVLV_services.urls')),
 ]

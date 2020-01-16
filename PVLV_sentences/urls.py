@@ -4,7 +4,7 @@ from PVLV_posts.api.views import PostSnippetViewSet
 
 
 router = routers.DefaultRouter()
-router.register('posts', PostSnippetViewSet)
+router.register('', PostSnippetViewSet)
 
 urlpatterns = [
     path('', include(router.urls))

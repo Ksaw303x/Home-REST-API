@@ -4,7 +4,7 @@ from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.utils import is_intent_name
 from ask_sdk_model import Response
 
-from PVLV_alexa.skill.pavlov_skill.core.util.sentence_generator import waiting_sentence
+from PVLV_alexa.skill.pavlov_skill.data import *
 
 
 logger = logging.getLogger(__name__)
@@ -20,14 +20,10 @@ class HowAreYouIntentHandler(AbstractRequestHandler):
         return is_intent_name("HowAreYouIntent")(handler_input)
 
     def handle(self, handler_input):
-        speech = "Mah, io benone, tu? Anzi no non mi iteressa"
-        speech = "Per ora tutto apposto, grazie"
-        speech = "Fantasticamente, sono alle versione 3 adesso"
-
         return (
             handler_input.response_builder
-            .speak(speech)
-            .ask(waiting_sentence())
+            .speak(HOW_ARE_YOU_MSG_3)
+            .ask(waiting_msg())
             .response
         )
 
@@ -43,6 +39,6 @@ class HelloWorldIntentHandler(AbstractRequestHandler):
         return (
             handler_input.response_builder
             .speak(speech)
-            .ask(waiting_sentence())
+            .ask(waiting_msg())
             .response
         )

@@ -1,5 +1,4 @@
 import logging
-from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.utils import (
@@ -7,20 +6,12 @@ from ask_sdk_core.utils import (
     is_intent_name,
     get_intent_name
 )
-from ask_sdk_model import Response
 
-from PVLV_alexa.skill.pavlov_skill.core.util.sentence_generator import welcome_sentence
-from PVLV_alexa.skill.pavlov_skill.core.util.sentence_generator import waiting_sentence
+from PVLV_alexa.skill.pavlov_skill.data import *
 
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-
-
-help_speech = "Mmmh leggi le istruzioni"
-stop_speech = "Se vedemo!"
-cancel_speech = ""
-exception_speech = "Non ti capisco, parla più forte."
 
 
 class LaunchRequestHandler(AbstractRequestHandler):
@@ -33,8 +24,8 @@ class LaunchRequestHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         return (
             handler_input.response_builder
-            .speak(welcome_sentence())
-            .ask(waiting_sentence())
+            .speak(welcome_msg())
+            .ask(waiting_msg())
             .response
         )
 
@@ -49,8 +40,8 @@ class HelpIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         return (
             handler_input.response_builder
-            .speak(help_speech)
-            .ask(waiting_sentence())
+            .speak(HELP_MSG)
+            .ask(waiting_msg())
             .response
         )
 
@@ -67,7 +58,7 @@ class CancelOrStopIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         return (
             handler_input.response_builder
-            .speak(stop_speech)
+            .speak(STOP_MSG)
             .response
         )
 
@@ -101,7 +92,7 @@ class IntentReflectorHandler(AbstractRequestHandler):
         return (
             handler_input.response_builder
             .speak(speak_output)
-            .ask(waiting_sentence())
+            .ask(waiting_msg())
             .response
         )
 
@@ -120,7 +111,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 
         return (
             handler_input.response_builder
-            .speak(exception_speech)
-            .ask(waiting_sentence())
+            .speak(EXCEPTION_MSG)
+            .ask(waiting_msg())
             .response
         )
